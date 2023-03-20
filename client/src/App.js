@@ -1,21 +1,21 @@
-import React, {Component, Fragment} from 'react';
-import {BrowserRouter, Routes} from "react-router-dom";
-import {Route} from "react-router";
-import ReadPage from "./Pages/ReadPage";
+import React, { Component } from 'react';
+// import { Route} from "react-router";
+import{BrowserRouter as Router, Route,Routes} from 'react-router-dom'
 import CreatePage from "./Pages/CreatePage";
+import ReadPage from "./Pages/ReadPage";
 import UpdatePage from "./Pages/UpdatePage";
 class App extends Component {
     render() {
         return (
-            <Fragment>
-                <BrowserRouter>
-                   <Routes>
-                       <Route exact path="/" render={(props)=><ReadPage {...props} key={Date.now()} />}/>
-                       <Route exact path="/create" render={(props)=><CreatePage {...props} key={Date.now()} />}/>
-                       <Route exact path="/update/:id" render={(props)=><UpdatePage {...props} key={Date.now()} />}/>
-                   </Routes>
-                </BrowserRouter>
-            </Fragment>
+            <div>
+                <Router>
+                    <Routes>
+                        <Route exact path="/" element={<ReadPage/>}/>
+                        <Route exact path='/create' element={<CreatePage/>} />
+                        <Route exact path='/update/:id' element={<UpdatePage/>} />
+                    </Routes>
+                </Router>
+            </div>
         );
     }
 }
