@@ -1,12 +1,12 @@
 import React, {Fragment, useRef} from 'react';
 import {ErrorToast, isEmpty, SuccessToast} from "../../Helper/ValidationHelper";
 import {Create} from "../../APIServices/CRUDServices";
-// import FullScreenLoader from "../Common/FullScreenLoader";
+import FullScreenLoader from "../Common/FullScreenLoader";
 // import {withRouter} from "react-router";
 
 const CreateForm = (props) => {
 
-    let ProductName, ProductCode, Img, UnitPrice, Qty, TotalPrice = useRef();
+    let ProductName, ProductCode, Img, UnitPrice, Qty, TotalPrice, Loader = useRef();
 
     const SaveData = () => {
         let Product_Name=ProductName.value;
@@ -34,10 +34,10 @@ const CreateForm = (props) => {
             ErrorToast("Product Total Price Required");
         }
         else{
-            // Loader.classList.remove("d-none")
+            Loader.classList.remove("d-none")
             Create(Product_Name,Product_Code,Product_Img,Unit_Price,Product_Qty,Total_Price)
                 .then((Result)=>{
-                    // Loader.classList.add("d-none")
+                    Loader.classList.add("d-none")
                     if(Result===true){
                         SuccessToast("Data Save Success")
                         // props.history.push("/");
@@ -101,6 +101,9 @@ const CreateForm = (props) => {
                     </div>
                 </div>
 
+            </div>
+            <div className="d-none" ref={(div)=>Loader=div}>
+                <FullScreenLoader/>
             </div>
         </Fragment>
     );
