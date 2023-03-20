@@ -40,7 +40,13 @@ const CreateForm = (props) => {
                     // Loader.classList.add("d-none")
                     if(Result===true){
                         SuccessToast("Data Save Success")
-                        props.history.push("/");
+                        // props.history.push("/");
+                        ProductName.value = "";
+                        ProductCode.value = "";
+                        Img.value ="";
+                        UnitPrice.value = "";
+                        Qty.value = "";
+                        TotalPrice.value = "";
                     }
                     else {
                         ErrorToast("Request Fail Try Again");
