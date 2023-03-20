@@ -6,8 +6,7 @@ const ReadPage = () => {
     return (
         <div>
             <AppNavBar/>
-            {/*<ListTable/>*/}
-            <h1>Read Page</h1>
+            <ListTable/>
         </div>
     );
 };
