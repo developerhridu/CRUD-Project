@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import {Read, Delete} from "../../APIServices/CRUDServices";
 import FullScreenLoader from "../Common/FullScreenLoader";
 import {ErrorToast, SuccessToast} from "../../Helper/ValidationHelper";
@@ -7,6 +8,7 @@ import {ErrorToast, SuccessToast} from "../../Helper/ValidationHelper";
 const ListTable = () => {
 
     const [DataList, SetDataList] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         Read().then((Result)=>{
@@ -17,11 +19,19 @@ const ListTable = () => {
 
     const DeleteItem = (id) =>{
         Delete(id).then((Result) => {
-            if(Result === true)
-                SuccessToast("Deleted")
+            if(Result === true){
+                SuccessToast("Deleted");
+                Read().then(r => SetDataList(r));
+            }
+
+
             else
                 ErrorToast("Not Deleted")
         })
+    }
+
+    const UpdateItem=(id)=>{
+        navigate(`/update/${id}`);
     }
 
 
@@ -76,7 +86,7 @@ const ListTable = () => {
                                                     </td>
                                                     <td>
                                                         <button onClick={DeleteItem.bind(this, item._id)} className="btn btn-danger mx-1">Delete</button>
-                                                        <button className="btn btn-success mx-1">Update</button>
+                                                        <button onClick={UpdateItem.bind(this, item._id)} className="btn btn-success mx-1">Update</button>
                                                     </td>
                                                 </tr>
                                             )
