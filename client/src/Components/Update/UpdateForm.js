@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import FullScreenLoader from "../Common/FullScreenLoader";
 import {ErrorToast, isEmpty, SuccessToast} from "../../Helper/ValidationHelper";
-import {ReadByID, Update} from "../../APIServices/CRUDServices";
+import {ReadByID, Update} from "../../APIs/CRUDServices";
 const UpdateForm = (props) => {
     let ProductName,ProductCode,Img,UnitPrice,Qty,TotalPrice,Loader=useRef();
     const navigate = useNavigate();

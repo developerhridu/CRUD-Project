@@ -1,7 +1,7 @@
 import React from 'react';
-import UpdateForm from "../Components/Update/UpdateForm";
+import { useParams } from "react-router";
 import AppNavBar from "../Components/Common/AppNavBar";
-import {useParams} from "react-router";
+import UpdateForm from "../Components/Update/UpdateForm";
 const UpdatePage = () => {
     const params=useParams();
     return (

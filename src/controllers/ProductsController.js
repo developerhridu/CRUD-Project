@@ -1,4 +1,7 @@
 const ProductsModel = require('../models/ProductsModel')
+const json2csv = require('json2csv').parse;
+const fs = require('fs');
+// const path = require('path');
 
 // C = Create
 exports.CreateProduct = (req, res) =>{

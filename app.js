@@ -33,14 +33,14 @@ app.use(limiter)
 
 
 // Mongo DB Database Connection
-let URI="mongodb://127.0.0.1:27017/CRUD";
+let DB="mongodb://127.0.0.1:27017/CRUD";
 // let OPTION={user:'testuser7777',pass:'testuser7777',autoIndex:true}
-mongoose.connect(URI,(error)=>{
+mongoose.connect(DB,(error)=>{
     if(error){
         console.log(error)
     }
     else{
-        console.log("Connection Success")
+        console.log("Database connection established at ", DB)
     }
 
 })

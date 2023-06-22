@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import {Read, Delete} from "../../APIServices/CRUDServices";
+import { Delete, Read } from "../../APIs/CRUDServices";
+import { ErrorToast, SuccessToast } from "../../Helper/ValidationHelper";
 import FullScreenLoader from "../Common/FullScreenLoader";
-import {ErrorToast, SuccessToast} from "../../Helper/ValidationHelper";
 
 
 const ListTable = () => {
@@ -15,6 +15,54 @@ const ListTable = () => {
             SetDataList(Result)
         })
     }, [])
+    const handleDownloadJSON = () => {
+        // Create a new <a> element
+        const a = document.createElement("a");
+
+        // Create a Blob containing the JSON data
+        const jsonData = JSON.stringify(DataList);
+        const blob = new Blob([jsonData], { type: "application/json" });
+
+        // Set the download attribute and URL for the <a> element
+        a.href = URL.createObjectURL(blob);
+        a.download = "myFile.json";
+
+        // Programmatically click the <a> element to trigger the download
+        a.click();
+    };
+    const handleDownloadCSV = () => {
+        // Create a new <a> element
+        const a = document.createElement("a");
+
+        // Convert data to CSV format
+        const csvData = convertToCSV(DataList);
+
+        // Create a Blob containing the CSV data
+        const blob = new Blob([csvData], { type: "text/csv" });
+
+        // Set the download attribute and URL for the <a> element
+        a.href = URL.createObjectURL(blob);
+        a.download = "myFile.csv";
+
+        // Programmatically click the <a> element to trigger the download
+        a.click();
+    };
+
+// Helper function to convert data to CSV format
+    const convertToCSV = (dataList) => {
+        // Define CSV headers
+        const headers = ['ProductName', 'ProductCode', 'Img', 'UnitPrice', 'Qty', 'TotalPrice', 'CreatedDate'];
+
+        // Create CSV rows
+        const rows = dataList.map((data) => {
+            return headers.map((header) => data[header]).join(',');
+        });
+
+        // Combine headers and rows
+        const csvContent = [headers.join(','), ...rows].join('\n');
+
+        return csvContent;
+    };
 
 
     const DeleteItem = (id) =>{
@@ -33,6 +81,7 @@ const ListTable = () => {
     const UpdateItem=(id)=>{
         navigate(`/update/${id}`);
     }
+    
 
 
     if(DataList.length > 0){
@@ -95,6 +144,10 @@ const ListTable = () => {
 
                                     </tbody>
                                 </table>
+                                <div>
+                                    <button className='btn btn-success mx-1' onClick={handleDownloadJSON}>Download as JSON</button>
+                                    <button className="btn btn-danger mx-1" onClick={() => handleDownloadCSV()}>Download as CSV</button>
+                                </div>
                             </div>
                         </div>
                     </div>

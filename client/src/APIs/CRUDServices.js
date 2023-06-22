@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export function Create(ProductName,ProductCode,Img,UnitPrice,Qty,TotalPrice){
     let URL="/api/v1/CreateProduct";
+    console.log("URL: " + URL);
     let PostBody = {
         ProductName:ProductName,
         ProductCode:ProductCode,
@@ -27,6 +28,7 @@ export function Create(ProductName,ProductCode,Img,UnitPrice,Qty,TotalPrice){
 
 export function Read(){
     let URL="/api/v1/ReadProduct";
+    // console.log("URL: " + URL);
 
     return axios.get(URL).then((res) =>{
         if(res.status === 200){

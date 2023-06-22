@@ -1,6 +1,6 @@
 import React, {Fragment, useRef} from 'react';
 import {ErrorToast, isEmpty, SuccessToast} from "../../Helper/ValidationHelper";
-import {Create, Read} from "../../APIServices/CRUDServices";
+import {Create, Read} from "../../APIs/CRUDServices";
 import FullScreenLoader from "../Common/FullScreenLoader";
 // import {withRouter} from "react-router";
 
